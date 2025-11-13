@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Ink Time</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        #clock {
+            font-family: 'Bookerly', 'Arial Black', 'Helvetica Bold', sans-serif;
+            font-size: 20vw;
+            font-weight: bold;
+            color: #000000;
+            text-align: center;
+            margin-left: 15%;
+            margin-right: 15%;
+        }
+    </style>
+</head>
+<body>
+    <div id="clock"></div>
+    <script>
+        function updateTime() {
+            const now = new Date();
+            let hours = now.getHours();
+            const minutes = now.getMinutes();
+            
+            // Convert to 12-hour format
+            if (hours === 0) {
+                hours = 12;
+            } else if (hours > 12) {
+                hours = hours - 12;
+            }
+            
+            // Pad minutes with leading zero
+            const formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+            
+            // Format as HH:MM
+            const formattedTime = hours + ':' + formattedMinutes;
+            
+            // Update the clock display
+            document.getElementById('clock').textContent = formattedTime;
+        }
+        
+        // Call updateTime immediately on page load
+        updateTime();
+        
+        // Set up automatic refresh every 60 seconds
+        setInterval(updateTime, 60000);
+    </script>
+</body>
+</html>
